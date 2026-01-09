@@ -1,45 +1,49 @@
 import React from 'react';
+import { useResponsive } from '../hooks/useResponsive';
 
 const BrandEssence: React.FC = () => {
+  const { isMobile, isTablet, isDesktop } = useResponsive();
   const sectionStyle: React.CSSProperties = {
     backgroundColor: '#e9dbce',
     backgroundImage: `url('/bbg.png')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    padding: '0px 0 0px 0',
+    padding: isMobile ? '60px 0' : isTablet ? '80px 0' : '40px 0 40px 0',
     position: 'relative',
     width: '100vw',
     marginLeft: 'calc(-50vw + 50%)',
-    minHeight: '450px',
+    minHeight: isMobile ? '400px' : isTablet ? '500px' : '450px',
     display: 'flex',
     alignItems: 'center',
   };
 
   const containerStyle: React.CSSProperties = {
-    maxWidth: '1100px',
-    marginLeft: '19%',
-    marginRight: '10%',
-    padding: '0 24px',
-    textAlign: 'left',
+    maxWidth: isMobile ? '100%' : isTablet ? '800px' : '1100px',
+    marginLeft: isMobile ? '0' : isTablet ? '10%' : '19%',
+    marginRight: isMobile ? '0' : '10%',
+    padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 24px',
+    textAlign: isMobile ? 'center' : 'left',
     display: 'block',
+    width: isMobile ? '100%' : 'auto',
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '64px',
+    fontSize: isMobile ? '32px' : isTablet ? '48px' : '64px',
     fontWeight: 'bold',
     color: '#2b1b12',
-    marginBottom: '16px',
-    marginTop: '-50px',
-    letterSpacing: '3px',
+    marginBottom: isMobile ? '20px' : '16px',
+    marginTop: isMobile ? '0px' : isTablet ? '-30px' : '-50px',
+    letterSpacing: isMobile ? '1px' : isTablet ? '2px' : '3px',
     textTransform: 'uppercase',
+    lineHeight: isMobile ? '1.2' : '1.1',
   };
 
   const descriptionStyle: React.CSSProperties = {
-    fontSize: '36px',
+    fontSize: isMobile ? '18px' : isTablet ? '28px' : '36px',
     color: '#8b6f47',
-    lineHeight: '1.3',
-    maxWidth: '800px',
+    lineHeight: isMobile ? '1.5' : '1.3',
+    maxWidth: isMobile ? '100%' : isTablet ? '600px' : '800px',
     fontWeight: '600',
     margin: '0',
   };

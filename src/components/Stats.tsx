@@ -32,7 +32,7 @@ const Stats: React.FC = () => {
 
   const sectionStyle: React.CSSProperties = {
     backgroundColor: '#e9dbce',
-    padding: '30px 0',
+    padding: '60px 0 60px',
   };
 
   const containerStyle: React.CSSProperties = {

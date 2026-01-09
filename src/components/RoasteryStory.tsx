@@ -1,15 +1,22 @@
 import React from 'react';
+import { useResponsive } from '../hooks/useResponsive';
 
 const RoasteryStory: React.FC = () => {
+  const { isMobile, isTablet, isDesktop } = useResponsive();
   const sectionStyle: React.CSSProperties = {
-    minHeight: '60vh',
-    background: `linear-gradient(rgba(26, 26, 26, 0.7), rgba(43, 27, 18, 0.7)), 
-                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c7a17a' fill-opacity='0.1'%3E%3Ccircle cx='20' cy='20' r='8'/%3E%3Ccircle cx='50' cy='30' r='6'/%3E%3Ccircle cx='80' cy='25' r='7'/%3E%3Ccircle cx='30' cy='60' r='5'/%3E%3Ccircle cx='70' cy='70' r='9'/%3E%3Ccircle cx='15' cy='80' r='4'/%3E%3C/g%3E%3C/svg%3E") #2b1b12`,
-    backgroundSize: '200px 200px',
+    minHeight: isMobile ? '70vh' : isTablet ? '80vh' : '100vh',
+    background: `url("/rbg.png")`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'scroll',
+    backgroundRepeat: 'no-repeat',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: isMobile ? 'center' : 'flex-end',
+    justifyContent: isMobile ? 'center' : 'flex-start',
     position: 'relative',
+    paddingBottom: isMobile ? '40px' : isTablet ? '60px' : '100px',
+    paddingLeft: isMobile ? '0px' : isTablet ? '32px' : '24px',
+    paddingRight: isMobile ? '0px' : '0px',
   };
 
   const overlayStyle: React.CSSProperties = {
@@ -18,45 +25,43 @@ const RoasteryStory: React.FC = () => {
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%)',
+    background: isMobile 
+      ? 'linear-gradient(to bottom, rgba(26, 26, 26, 0.4) 0%, rgba(26, 26, 26, 0.6) 100%)'
+      : 'radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%)',
   };
 
   const containerStyle: React.CSSProperties = {
-    maxWidth: '800px',
-    margin: '0 auto',
-    padding: '0 24px',
-    textAlign: 'center',
+    maxWidth: isMobile ? '100%' : isTablet ? '600px' : '1000px',
+    padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 24px',
+    textAlign: isMobile ? 'center' : 'left',
     position: 'relative',
     zIndex: 1,
-  };
-
-  const iconStyle: React.CSSProperties = {
-    fontSize: '80px',
-    marginBottom: '32px',
-    display: 'block',
-    filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))',
+    marginLeft: isMobile ? '0px' : isTablet ? '60px' : '140px',
+    width: isMobile ? '100%' : 'auto',
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '48px',
+    fontSize: isMobile ? '36px' : isTablet ? '56px' : '80px',
     fontWeight: 'bold',
     color: '#f3e8dc',
-    marginBottom: '16px',
+    marginBottom: isMobile ? '12px' : '0px',
     textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+    lineHeight: isMobile ? '1.2' : '1.1',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: '32px',
-    color: '#c7a17a',
-    fontWeight: '300',
+    fontSize: isMobile ? '24px' : isTablet ? '36px' : '52px',
+    color: '#ffffffff',
+    fontWeight: '400',
     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+    margin: isMobile ? '0' : '0',
+    lineHeight: isMobile ? '1.3' : '1.2',
   };
 
   return (
     <section style={sectionStyle}>
       <div style={overlayStyle}></div>
       <div style={containerStyle}>
-        <span style={iconStyle}>📍</span>
         <h2 style={titleStyle}>The Birth of the Roastery</h2>
         <p style={subtitleStyle}>The coffee address</p>
       </div>

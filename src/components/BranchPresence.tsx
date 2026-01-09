@@ -1,139 +1,164 @@
 import React from 'react';
 import Button from './Button';
+import { useResponsive } from '../hooks/useResponsive';
 
 interface StoreFormat {
   title: string;
   size: string;
   description: string;
-  emoji: string;
+  image: string;
+}
+
+// Add animation styles
+const animationStyle = `
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(-40px) translateX(-10px);
+    }
+    75% {
+      transform: translateY(-20px) translateX(15px);
+    }
+  }
+  
+  .map-sparkle {
+    position: relative;
+  }
+  
+  .map-sparkle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(2px 2px at 60% 70%, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(1px 1px at 80% 10%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(2px 2px at 90% 60%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 30% 80%, rgba(255, 255, 255, 0.6), transparent);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    animation: sparkle 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+`;
+
+// Inject animation into document
+if (typeof document !== 'undefined') {
+  const style = document.createElement('style');
+  style.textContent = animationStyle;
+  document.head.appendChild(style);
 }
 
 const BranchPresence: React.FC = () => {
+  const { isMobile, isTablet, isDesktop } = useResponsive();
   const storeFormats: StoreFormat[] = [
     {
       title: 'Cafe',
       size: '100m² to 350m²',
       description: 'Full service coffee experience',
-      emoji: '🏪'
+      image: '/b1.png'
     },
     {
       title: 'DT Cafe',
       size: '150m² to 350m²',
       description: 'Drive-through convenience',
-      emoji: '🚗'
+      image: '/b2.png'
     },
     {
       title: 'Internal Kiosk',
       size: '15m² to 75m²',
       description: 'Compact premium service',
-      emoji: '🏢'
+      image: '/b3.png'
     },
     {
       title: 'DT only Kiosk',
       size: '15m² to 40m²',
       description: 'Express drive-through',
-      emoji: '⚡'
+      image: '/b4.png'
     }
   ];
 
   const sectionStyle: React.CSSProperties = {
-    backgroundColor: '#1a1a1a',
-    padding: '120px 0',
+    backgroundColor: '#37261c',
+    padding: isMobile ? '40px 0 20px 0' : isTablet ? '60px 0 30px 0' : '80px 0 40px 0',
     position: 'relative',
-    backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c7a17a' fill-opacity='0.03'%3E%3Cpath d='M50 50c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10zm-20 0c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10zm-20 0c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
+    overflow: 'hidden',
   };
 
   const containerStyle: React.CSSProperties = {
-    maxWidth: '1200px',
+    maxWidth: isMobile ? '100%' : isTablet ? '768px' : '1200px',
     margin: '0 auto',
-    padding: '0 24px',
+    padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 24px',
   };
 
   const headerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    marginBottom: '80px',
+    textAlign: isMobile ? 'center' : 'left',
+    marginBottom: isMobile ? '32px' : isTablet ? '50px' : '80px',
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '48px',
+    fontSize: isMobile ? '32px' : isTablet ? '48px' : '64px',
     fontWeight: 'bold',
     color: '#f3e8dc',
-    marginBottom: '24px',
-    letterSpacing: '2px',
+    marginBottom: isMobile ? '16px' : '24px',
+    letterSpacing: isMobile ? '1px' : '2px',
+    lineHeight: isMobile ? '1.2' : '1.1',
   };
 
   const descriptionStyle: React.CSSProperties = {
-    fontSize: '20px',
+    fontSize: isMobile ? '14px' : isTablet ? '18px' : '26px',
     color: '#c7a17a',
-    maxWidth: '600px',
-    margin: '0 auto',
     lineHeight: '1.6',
+    maxWidth: isMobile ? '100%' : isTablet ? '600px' : '800px',
+    margin: isMobile ? '0 auto' : '0',
   };
 
   const formatsGridStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '32px',
-    marginBottom: '80px',
+    gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+    gap: isMobile ? '16px' : isTablet ? '12px' : '8px',
+    marginBottom: isMobile ? '40px' : isTablet ? '50px' : '80px',
+    maxWidth: isMobile ? '300px' : 'none',
+    margin: isMobile ? '0 auto 40px auto' : isTablet ? '0 auto 50px auto' : '0 auto 80px auto',
   };
 
-  const formatCardStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(199, 161, 122, 0.1)',
-    border: '1px solid rgba(199, 161, 122, 0.2)',
-    borderRadius: '12px',
-    padding: '32px 24px',
-    textAlign: 'center',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-  };
 
-  const formatEmojiStyle: React.CSSProperties = {
-    fontSize: '48px',
-    marginBottom: '16px',
+  const formatImageStyle: React.CSSProperties = {
+    width: '100%',
+    height: isMobile ? '120px' : isTablet ? '140px' : '150px',
+    objectFit: 'contain',
+    borderRadius: isMobile ? '8px' : '12px',
     display: 'block',
-  };
-
-  const formatTitleStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#f3e8dc',
-    marginBottom: '8px',
-  };
-
-  const formatSizeStyle: React.CSSProperties = {
-    fontSize: '16px',
-    color: '#c7a17a',
-    marginBottom: '12px',
-    fontWeight: '500',
-  };
-
-  const formatDescriptionStyle: React.CSSProperties = {
-    fontSize: '14px',
-    color: '#c7a17a',
-    lineHeight: '1.5',
-  };
-
-  const mapSectionStyle: React.CSSProperties = {
-    textAlign: 'center',
-    padding: '60px 40px',
-    backgroundColor: 'rgba(199, 161, 122, 0.05)',
-    borderRadius: '16px',
-    border: '1px solid rgba(199, 161, 122, 0.1)',
   };
 
   const mapStyle: React.CSSProperties = {
     width: '100%',
-    height: '300px',
-    backgroundColor: 'rgba(199, 161, 122, 0.1)',
-    borderRadius: '12px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '48px',
-    marginBottom: '32px',
-    border: '2px dashed rgba(199, 161, 122, 0.3)',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '0px',
+    display: 'block',
+    position: 'relative',
+    zIndex: 0,
   };
-
-  const [hoveredFormat, setHoveredFormat] = React.useState<number | null>(null);
 
   return (
     <section style={sectionStyle}>
@@ -148,31 +173,47 @@ const BranchPresence: React.FC = () => {
 
         <div style={formatsGridStyle}>
           {storeFormats.map((format, index) => (
-            <div
+            <img 
               key={index}
-              style={{
-                ...formatCardStyle,
-                transform: hoveredFormat === index ? 'translateY(-8px)' : 'translateY(0)',
-                boxShadow: hoveredFormat === index 
-                  ? '0 20px 40px rgba(199, 161, 122, 0.2)' 
-                  : '0 8px 24px rgba(0, 0, 0, 0.2)',
-              }}
-              onMouseEnter={() => setHoveredFormat(index)}
-              onMouseLeave={() => setHoveredFormat(null)}
-            >
-              <span style={formatEmojiStyle}>{format.emoji}</span>
-              <h3 style={formatTitleStyle}>{format.title}</h3>
-              <p style={formatSizeStyle}>{format.size}</p>
-              <p style={formatDescriptionStyle}>{format.description}</p>
-            </div>
+              src={format.image} 
+              alt={format.title} 
+              style={formatImageStyle}
+            />
           ))}
         </div>
+      </div>
 
-        <div style={mapSectionStyle}>
-          <div style={mapStyle}>
-            🗺️
-          </div>
-          <Button variant="outline" size="large">
+      <div className="map-sparkle" style={{ 
+        position: 'relative', 
+        width: '100vw', 
+        height: isMobile ? '200px' : isTablet ? '300px' : '450px', 
+        marginLeft: 'calc(-50vw + 50%)', 
+        marginBottom: '0px' 
+      }}>
+        <video 
+          src="/bv.mp4" 
+          style={mapStyle} 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        />
+      </div>
+
+      <div style={containerStyle}>
+        <div style={{ 
+          textAlign: isMobile ? 'center' : 'left', 
+          marginTop: isMobile ? '24px' : isTablet ? '32px' : '40px' 
+        }}>
+          <Button 
+            variant="outline" 
+            size={isMobile ? "medium" : "large"}
+            style={{ 
+              fontSize: isMobile ? '14px' : isTablet ? '18px' : '24px', 
+              padding: isMobile ? '10px 24px' : isTablet ? '12px 28px' : '12px 32px',
+              minWidth: isMobile ? '200px' : 'auto'
+            }}
+          >
             Locate Nearest Branch
           </Button>
         </div>

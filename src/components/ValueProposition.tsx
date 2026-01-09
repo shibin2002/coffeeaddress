@@ -1,4 +1,5 @@
 import React from 'react';
+import { useResponsive } from '../hooks/useResponsive';
 
 interface ValueCard {
   icon: string;
@@ -7,6 +8,7 @@ interface ValueCard {
 }
 
 const ValueProposition: React.FC = () => {
+  const { isMobile, isTablet, isDesktop } = useResponsive();
   const valueCards: ValueCard[] = [
     {
       icon: '/1.png',
@@ -15,7 +17,7 @@ const ValueProposition: React.FC = () => {
     },
     {
       icon: '/2.png',
-      title: 'Fast Service',
+      title: 'Fast Services',
       description: 'Designed for efficiency every cup on time.'
     },
     {
@@ -31,118 +33,120 @@ const ValueProposition: React.FC = () => {
   ];
 
   const sectionStyle: React.CSSProperties = {
-    background: 'linear-gradient(to bottom, #c7a17a 0%, #c7a17a 50%, transparent 50%), url(/vbg.png)',
+    background: 'linear-gradient(to bottom, #c7a88b 0%, #c7a88b 50%, transparent 50%), url(/vbg.png)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    padding: '1px 0 120px 0',
+    padding: isMobile ? '40px 0 80px 0' : isTablet ? '50px 0 100px 0' : '50px 0 120px 0',
     position: 'relative',
-    minHeight: '800px',
+    minHeight: isMobile ? '800px' : isTablet ? '900px' : '1000px',
   };
 
   const containerStyle: React.CSSProperties = {
-    maxWidth: '1200px',
+    maxWidth: isMobile ? '100%' : isTablet ? '768px' : '1200px',
     margin: '0 auto',
-    padding: '0 24px',
+    padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 24px',
   };
 
   const headerStyle: React.CSSProperties = {
-    textAlign: 'left',
-    marginBottom: '80px',
-    paddingLeft: '150px',
+    textAlign: isMobile ? 'center' : 'left',
+    marginBottom: isMobile ? '50px' : isTablet ? '70px' : '100px',
+    paddingLeft: isMobile ? '0px' : isTablet ? '40px' : '150px',
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '64px',
+    fontSize: isMobile ? '28px' : isTablet ? '42px' : '64px',
     fontWeight: 'bold',
     color: '#2b1b12',
-    marginBottom: '-35px',
-    lineHeight: '1.2',
+    marginBottom: isMobile ? '16px' : '25px',
+    lineHeight: isMobile ? '1.3' : '1.2',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: '36px',
+    fontSize: isMobile ? '18px' : isTablet ? '26px' : '36px',
     color: '#ffffff',
     fontWeight: '600',
   };
 
   const cardsGridStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '32px',
-    marginBottom: '80px',
-    maxWidth: '800px',
-    margin: '0 auto 80px auto',
-    marginTop: '-40px',
+    gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+    gap: isMobile ? '16px' : isTablet ? '20px' : '32px',
+    marginBottom: isMobile ? '50px' : isTablet ? '70px' : '80px',
+    maxWidth: isMobile ? '320px' : isTablet ? '600px' : '800px',
+    margin: isMobile ? '0 auto 50px auto' : isTablet ? '0 auto 70px auto' : '0 auto 80px auto',
+    marginTop: isMobile ? '0px' : isTablet ? '-20px' : '-40px',
   };
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: '#a68968',
-    padding: '6px 12px',
-    borderRadius: '20px',
-    textAlign: 'left',
+    backgroundColor: '#9e7c5f',
+    padding: isMobile ? '16px 16px 16px 20px' : '6px 12px 6px 24px',
+    borderRadius: isMobile ? '16px' : '20px',
+    textAlign: isMobile ? 'center' : 'left',
     border: 'none',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-    minHeight: '255px',
+    minHeight: isMobile ? '180px' : isTablet ? '210px' : '255px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
   };
 
   const cardIconStyle: React.CSSProperties = {
-    width: '80px',
-    height: '80px',
-    marginBottom: '-35px',
+    width: isMobile ? '50px' : isTablet ? '60px' : '80px',
+    height: isMobile ? '50px' : isTablet ? '60px' : '80px',
+    marginBottom: isMobile ? '12px' : isTablet ? '8px' : '8px',
     display: 'block',
     objectFit: 'contain',
-    margin: '0 auto -35px auto',
+    margin: isMobile ? '0 auto 12px auto' : isTablet ? '0 auto 8px auto' : '0 auto 8px auto',
   };
 
   const cardTitleStyle: React.CSSProperties = {
-    fontSize: '28px',
+    fontSize: isMobile ? '16px' : isTablet ? '20px' : '25px',
     fontWeight: 'bold',
     color: '#ffffff',
-    marginBottom: '6px',
+    marginBottom: isMobile ? '8px' : '6px',
+    lineHeight: '1.1',
   };
 
   const cardDescriptionStyle: React.CSSProperties = {
-    fontSize: '18px',
+    fontSize: isMobile ? '12px' : isTablet ? '14px' : '18px',
     color: '#f3e8dc',
-    lineHeight: '1.2',
+    lineHeight: isMobile ? '1.4' : '1.2',
     margin: '0',
-    paddingBottom: '12px',
+    paddingBottom: isMobile ? '8px' : '12px',
   };
 
   const beliefSectionStyle: React.CSSProperties = {
-    textAlign: 'left',
+    textAlign: isMobile ? 'center' : 'left',
     color: '#f3e8dc',
-    paddingLeft: '150px',
+    paddingLeft: isMobile ? '0px' : isTablet ? '40px' : '150px',
+    paddingRight: isMobile ? '0px' : '0px',
   };
 
   const beliefTitleStyle: React.CSSProperties = {
-    fontSize: '56px',
+    fontSize: isMobile ? '32px' : isTablet ? '44px' : '56px',
     fontWeight: 'bold',
-    marginBottom: '-65px',
+    marginBottom: isMobile ? '-10px' : '-20px',
     color: '#ffffff',
-    letterSpacing: '2px',
+    letterSpacing: isMobile ? '1px' : '2px',
   };
 
   const beliefSubtitleStyle: React.CSSProperties = {
-    fontSize: '48px',
+    fontSize: isMobile ? '28px' : isTablet ? '36px' : '48px',
     color: '#ffffff',
     marginBottom: '0px',
     fontWeight: '300',
   };
 
   const valuesStyle: React.CSSProperties = {
-    fontSize: '24px',
+    fontSize: isMobile ? '16px' : isTablet ? '20px' : '24px',
     color: '#f3e8dc',
     fontWeight: '400',
     margin: '0',
   };
 
   const valuesFirstPStyle: React.CSSProperties = {
-    margin: '36px 0 0 0',
+    margin: isMobile ? '24px 0 0 0' : '36px 0 0 0',
     color: '#c7a17a',
   };
 
