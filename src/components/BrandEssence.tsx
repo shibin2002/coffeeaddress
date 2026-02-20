@@ -2,7 +2,7 @@ import React from 'react';
 import { useResponsive } from '../hooks/useResponsive';
 
 const BrandEssence: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const sectionStyle: React.CSSProperties = {
     backgroundColor: '#e9dbce',
     backgroundImage: `url('/bbg.png')`,

@@ -2,7 +2,7 @@ import React from 'react';
 import { useResponsive } from '../hooks/useResponsive';
 
 const Footer: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   
   const paymentMethods = [
     { name: 'Mada', src: '/payment-logos/mada.svg' },
@@ -118,15 +118,7 @@ const Footer: React.FC = () => {
     marginBottom: isMobile ? '12px' : '20px',
   };
 
-  const bottomSectionStyle: React.CSSProperties = {
-    paddingTop: isMobile ? '20px' : '32px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: isMobile ? '12px' : '16px',
-    flexDirection: isMobile ? 'column' : 'row',
-  };
+
 
   return (
     <footer style={footerStyle}>
@@ -271,7 +263,7 @@ const Footer: React.FC = () => {
               Download<br />
               Address Coffee APP Now
             </h4>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: isMobile ? '16px' : '20px', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'center' : 'flex-start' }}>
+            <div style={{ display: 'flex', alignItems: isMobile ? 'center' : 'flex-start', gap: isMobile ? '16px' : '20px', flexDirection: isMobile ? 'column' : 'row' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '12px' : '16px', alignItems: isMobile ? 'center' : 'flex-start' }}>
                 <button style={{
                   display: 'flex',

@@ -69,7 +69,7 @@ if (typeof document !== 'undefined') {
 }
 
 const BranchPresence: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const storeFormats: StoreFormat[] = [
     {
       title: 'Cafe',

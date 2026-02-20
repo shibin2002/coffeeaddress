@@ -3,7 +3,7 @@ import Button from './Button';
 import { useResponsive } from '../hooks/useResponsive';
 
 const BusinessExpansion: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const topSectionStyle: React.CSSProperties = {
     backgroundColor: '#e9dbce',
     padding: isMobile ? '40px 0 60px 0' : isTablet ? '60px 0 90px 0' : '80px 0 120px 0',

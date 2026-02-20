@@ -2,7 +2,7 @@ import React from 'react';
 import { useResponsive } from '../hooks/useResponsive';
 
 const RoasteryStory: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const sectionStyle: React.CSSProperties = {
     minHeight: isMobile ? '70vh' : isTablet ? '80vh' : '100vh',
     background: `url("/rbg.png")`,

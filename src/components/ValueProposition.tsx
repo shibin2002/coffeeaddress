@@ -8,7 +8,7 @@ interface ValueCard {
 }
 
 const ValueProposition: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const valueCards: ValueCard[] = [
     {
       icon: '/1.png',

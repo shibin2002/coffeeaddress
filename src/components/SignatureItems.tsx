@@ -11,7 +11,7 @@ interface MenuItem {
 }
 
 const SignatureItems: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const menuItems: MenuItem[] = [
     {
       name: 'THE COFFEE DAY',

@@ -2,7 +2,7 @@ import React from 'react';
 import { useResponsive } from '../hooks/useResponsive';
 
 const AppPromo: React.FC = () => {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const sectionStyle: React.CSSProperties = {
     backgroundColor: '#f3e8dc',
     padding: isMobile ? '30px 0 20px 0' : isTablet ? '35px 0 25px 0' : '40px 0 30px 0',
